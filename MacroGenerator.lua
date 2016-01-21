@@ -15,17 +15,17 @@ function Cork.GenerateMacro()
 		local body, ic, ooc
 		local icon = "INV_MISC_QUESTIONMARK"
 		local c = Cork.MYCLASS
-		if c == "DEATHKNIGHT" then ooc = 3714
-		elseif c == "HUNTER"  then ooc = 13165
-		elseif c == "SHAMAN"  then ooc = 324
-		elseif c == "WARLOCK" then ooc = 6201
-		elseif c == "WARRIOR" then ooc = 6673
-		elseif c == "MONK"    then ooc = 115921
-		elseif c == "ROGUE"   then ooc = 2823
-		elseif c == "DRUID"   then ic, ooc = 22812, 1126
-		elseif c == "MAGE"    then ic, ooc = 30482, 1459
-		elseif c == "PALADIN" then ic, ooc = 20165, 19740
-		elseif c == "PRIEST"  then ic, ooc = 588,   21562
+		if c == "DEATHKNIGHT" then ooc = 3714 -- Path of Frost
+		elseif c == "HUNTER"  then ooc = 5118 -- Aspect of Cheetah
+		elseif c == "SHAMAN"  then ooc = 324 -- Lightning Shield
+		elseif c == "WARLOCK" then ooc = 6201 -- Create Heartstone
+		elseif c == "WARRIOR" then ooc = 6673 -- Battle Shout
+		elseif c == "MONK"    then ooc = 115921 -- Legacy of the Emperor
+		elseif c == "ROGUE"   then ooc = 2823 -- Deadly Poison
+		elseif c == "DRUID"   then ic, ooc = 22812, 1126 -- Barskin, Mark of the Wild
+		elseif c == "MAGE"    then ic, ooc = 30482, 1459 -- Molten Armor, Arcane Brilliance
+		elseif c == "PALADIN" then ic, ooc = 20165, 19740 -- Seal of Insight, Blessing of Might
+		elseif c == "PRIEST"  then ooc = 21562 -- Power Word: Fortitude
 		end
 		if ic and ooc then
 			ic, ooc = GetSpellInfo(ic), GetSpellInfo(ooc)
@@ -35,9 +35,9 @@ function Cork.GenerateMacro()
 			texture = texture:upper():match("^INTERFACE\\ICONS\\(.+)")
 			if texture then
 				icon = texture
-				body = "/click CorkFrame"
+				body = "#showtooltip "..ooc.."\n/cast [nocombat] "..ooc.. "\n/click CorkFrame"
 			else
-				body = "#showtooltip "..ooc.."\n/click CorkFrame"
+				body = "/click CorkFrame"
 			end
 		else
 			body = "/click CorkFrame"
