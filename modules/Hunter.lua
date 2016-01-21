@@ -22,7 +22,7 @@ end
 local dataobj = Cork:GenerateAdvancedSelfBuffer("Exotic Munitions", munitionids)
 
 dataobj.Test = function()
-	if not Cork.dbpc["Exotic Munitions-enabled"] or (IsResting() and not Cork.db.debug) or not IsPlayerSpell(EXOTIC_MUNITIONS_ID) then
+	if not Cork.dbpc["Exotic Munitions-enabled"] or (IsResting() and not Cork.db.debug) then
 		return
 	end
 	for _, spellname in pairs(munitionnames) do
@@ -40,10 +40,11 @@ end
 ae.RegisterEvent(dataobj, "PLAYER_TALENT_UPDATE", function()
 	if not IsPlayerSpell(EXOTIC_MUNITIONS_ID) then
 		ae.UnregisterEvent(dataobj, "UNIT_AURA")
+		dataobj.player = nil
 	else
 		ae.RegisterEvent(dataobj, "UNIT_AURA", dataobj.Scan)
+		dataobj.player = dataobj.Test()
 	end
-	dataobj.player = dataobj.Test()
 end)
 
 -- Trap Launcher
