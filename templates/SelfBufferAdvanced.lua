@@ -63,7 +63,8 @@ function Cork:GenerateAdvancedSelfBuffer(modulename, spellidlist, combatonly, us
 	if usestance then
 		ae.RegisterEvent(dataobj, "UPDATE_SHAPESHIFT_FORM", "Scan")
 	else
-		ae.RegisterEvent("Cork "..modulename, "UNIT_AURA", function(event, unit)
+		--ae.RegisterEvent("Cork "..modulename, "UNIT_AURA", function(event, unit)
+		ae.RegisterEvent(dataobj, "UNIT_AURA", function(event, unit)
 			if unit == "player" then dataobj.player = dataobj:Test() end
 		end)
 	end
